@@ -34,7 +34,7 @@ function closeModal() {
 closeForm.addEventListener("click",closeModal);*/
 
 
-// test du formulaire pour le prenom 
+// validateFirst permet de verifier si le prenom correspond bien a plus de 2 caracteres.
 
 let formFirst = document.getElementById('first');
 
@@ -61,7 +61,7 @@ function validateFirst(inputFirst){
   }
 };
 
-// test du formulaire pour le nom
+// validateLast permet de verifier si le nom de famille correspond bien a plus de 2 caracteres.
 
 let formLast = document.getElementById('last');
 
@@ -70,14 +70,11 @@ formLast.addEventListener('change', function(){
 });
 
 function validateLast(inputLast){
+
   let lastRegex = new RegExp('^[a-zA-Z][^0-9]+$');
 
   let testLast= lastRegex.test(inputLast.value);
 
-  //affiche dans la console si le test est reussi ou pas 
-  console.log("Le test du Nom est "+testLast);
-
-  // indiquer error si formulaire vide 
   if(!testLast || (inputLast.value == "")){
     formLast.parentElement.setAttribute("data-error-visible", "true");
     formLast.parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
@@ -89,9 +86,9 @@ function validateLast(inputLast){
   }
 };
 
-// test du formulaire pour l'email
-let formEmail = document.getElementById('email');
+// validateEmail permet de verifier si le champ saisie correspond bien a une adresse mail.
 
+let formEmail = document.getElementById('email');
 
 formEmail.addEventListener('change',function(){
   validateEmail(this);
@@ -103,9 +100,6 @@ function validateEmail(inputEmail){
   );
 
   let testEmail = emailRegex.test(inputEmail.value);
-  
-  //affiche dans la console si le test est reussi ou pas 
-  console.log("Le test Email est "+testEmail);
 
   if(!testEmail){
     formEmail.parentElement.setAttribute("data-error-visible", "true");
@@ -117,8 +111,27 @@ function validateEmail(inputEmail){
     return true;
   }
 }
+// verifie que la date est pas vide.
 
-// (4) Pour le nombre de concours, une valeur numérique est saisie.
+let formDate = document.getElementById('birthdate');
+
+function validateDate(){
+  console.log("je suis rentre dans validateDAte");
+  if(formDate.value == null || formDate.value ==""){
+    console.log("je suis dans le si ");
+
+    formDate.parentElement.setAttribute("data-error-visible", "true");
+    formDate.parentElement.setAttribute("data-error", "Date de naissance non saisie.");
+    return false;
+  }else{
+    console.log("je suis dans le sinon ");
+    formDate.parentElement.setAttribute("data-error-visible", "false");
+    formDate.parentElement.setAttribute("data-error", "");
+    return true;
+  };
+};
+
+// validateQuantity verifie qu'il y a bien un nombre inscrit dans le champ.
 
 let formQuantity = document.getElementById('quantity');
 
@@ -126,15 +139,8 @@ formQuantity.addEventListener('focusout',function(){
   validateQuantity(this);  
 });
 
-
 function validateQuantity(inputQuantity){
   let quantityRegex = new RegExp('^[0-9]+$');
-
-  //let testQuantity = quantityRegex.test(inputQuantity);
-
-  //affiche dans la console si le test est reussi ou pas 
-  //console.log(testQuantity);
-  console.log("la valeur  du nombre de concour est "+ quantityRegex.test(inputQuantity.value));
 
   if(quantityRegex.test(inputQuantity.value) == ""){
     formQuantity.parentElement.setAttribute("data-error-visible", "true");
@@ -146,15 +152,14 @@ function validateQuantity(inputQuantity){
     return true;
   }
 }
-// (5) Un bouton radio est sélectionné.
+
+// checkedRadio nous renvoie un message d'erreur si un bouton n'est pas selectionné.
 
 let formRadio = document.getElementsByClassName('checkbox-input')[0];
 
 function checkedRadio(){
-  console.log("je suis rentre dans checkedRadio");
   for(i = 1;i<=6;i++){
     if(!document.getElementById('location'+i).checked){
-      console.log("le bouton radio est "+document.getElementById('location'+i).checked);
       if(i == 6){
         formRadio.parentElement.setAttribute("data-error-visible","true");
         formRadio.parentElement.setAttribute("data-error","Veuillez saisir une destination");
@@ -169,12 +174,11 @@ function checkedRadio(){
   };
 };
 
-// (6) La case des conditions générales est cochée, l'autre case est facultative / peut être laissée décochée.
+// validateCheckBox1 permet de verifier si la case des conditions générales est cochée.
 
 let formCheckBox1 = document.getElementById('checkbox1');
 
 function validateCheckBox1(){
-  console.log(" la valeur de checkbox1 est (deuxieme temps) "+formCheckBox1.value);
   if(!formCheckBox1.checked){
     formCheckBox1.parentElement.setAttribute("data-error-visible","true");
     formCheckBox1.parentElement.setAttribute("data-error","Vous devez vérifier que vous acceptez les termes et conditions.");
@@ -185,7 +189,7 @@ function validateCheckBox1(){
   return true;
 }
 
-// validation du formulaire 
+
 
 /*
   (1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
@@ -203,11 +207,11 @@ btnSubmit.addEventListener('click',function(){
   validateForm(this);
 });
 
+// validateForm verifie que chaque est correct pour envoyer le message de confirmation d'inscription
 
 function validateForm(){
-  console.log("je suis avant le si ");
   
-  if(checkedRadio() & validateFirst(formFirst) & validateLast(formLast) & validateEmail(formEmail) & validateQuantity(formQuantity) & validateCheckBox1(formCheckBox1)){
+  if(validateDate() & checkedRadio() & validateFirst(formFirst) & validateLast(formLast) & validateEmail(formEmail) & validateQuantity(formQuantity) & validateCheckBox1(formCheckBox1)){
     
     let btnClose = "<input class='btn-submit btn-close' type='button' class='button' value='Fermer'/> ";
     let textRegistration = "<p class='textRegistr'> Merci pour votre inscription </p>";
