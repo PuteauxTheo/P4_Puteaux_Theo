@@ -12,6 +12,8 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalClose = document.querySelector(".close");
+const modalBody = document.getElementsByClassName('modal-body')[0];
+const formR = document.getElementsByName('reserve');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -23,7 +25,13 @@ function launchModal() {
 
 function closeModal() {
   modalbg.style.display = "none";
+  document.getElementById("form").reset(); 
+  //document.getElementById('modalBody').reset(); 
 }
+
+/*let closeForm = document.querySelector(".btn-close");
+
+closeForm.addEventListener("click",closeModal);*/
 
 
 // test du formulaire pour le prenom 
@@ -42,11 +50,13 @@ function validateFirst(inputFirst){
   //affiche dans la console si le test est reussi ou pas 
   console.log("Le test du prenom est "+testFirst);
   // indiquer error si formulaire vide 
-  if(!( testFirst || (inputFirst.value == "") )){
+  if(!testFirst || (inputFirst.value == "")){
     formFirst.parentElement.setAttribute("data-error-visible", "true");
     formFirst.parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
     return false;
   }else{
+    formFirst.parentElement.setAttribute("data-error-visible", "false");
+    formFirst.parentElement.setAttribute("data-error", "");
     return true;
   }
 };
@@ -73,6 +83,8 @@ function validateLast(inputLast){
     formLast.parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
     return false;
   }else{
+    formLast.parentElement.setAttribute("data-error-visible", "false");
+    formLast.parentElement.setAttribute("data-error", "");
     return true;
   }
 };
@@ -100,6 +112,8 @@ function validateEmail(inputEmail){
     formEmail.parentElement.setAttribute("data-error", "L'adresse électronique est invalide.");
     return false;
   }else{
+    formEmail.parentElement.setAttribute("data-error-visible", "false");
+    formEmail.parentElement.setAttribute("data-error", "");
     return true;
   }
 }
@@ -127,6 +141,8 @@ function validateQuantity(inputQuantity){
     formQuantity.parentElement.setAttribute("data-error","Veuillez entrer un chiffre");
     return false;
   }else{
+    formQuantity.parentElement.setAttribute("data-error-visible", "false");
+    formQuantity.parentElement.setAttribute("data-error", "");
     return true;
   }
 }
@@ -146,6 +162,8 @@ function checkedRadio(){
         return false;
       }
     }else{
+      formRadio.parentElement.setAttribute("data-error-visible", "false");
+      formRadio.parentElement.setAttribute("data-error", "");
       return true;
     }
   };
@@ -162,6 +180,8 @@ function validateCheckBox1(){
     formCheckBox1.parentElement.setAttribute("data-error","Vous devez vérifier que vous acceptez les termes et conditions.");
     return false;
   }
+  formCheckBox1.parentElement.setAttribute("data-error-visible", "false");
+  formCheckBox1.parentElement.setAttribute("data-error", "");
   return true;
 }
 
@@ -185,27 +205,18 @@ btnSubmit.addEventListener('click',function(){
 
 
 function validateForm(){
-  /*console.log("console 0");
-  checkedRadio();
-  console.log("console 1");
-  validateFirst();
-  console.log("console 2");
-  validateLast();
-  console.log("console 3");
-  validateEmail();
-  console.log("console 4");
-  validateQuantity();
-  console.log("console 5");  
-  validateCheckBox1();
-
-  console.log("je suis avant le si ");*/
+  console.log("je suis avant le si ");
   
-  if(checkedRadio()){
-    let modalBody = document.getElementsByClassName('modal-body')[0];
-    let btnClose = "<input class='btn-submit' type='button' class='button' value='Fermer'/> ";
+  if(checkedRadio() & validateFirst(formFirst) & validateLast(formLast) & validateEmail(formEmail) & validateQuantity(formQuantity) & validateCheckBox1(formCheckBox1)){
+    
+    let btnClose = "<input class='btn-submit btn-close' type='button' class='button' value='Fermer'/> ";
     let textRegistration = "<p class='textRegistr'> Merci pour votre inscription </p>";
     
     modalBody.innerHTML = textRegistration + btnClose;
+
   
   };
 };
+
+
+
