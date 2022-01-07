@@ -11,27 +11,30 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const modalClose = document.querySelector(".close");
+const modalClose = document.querySelectorAll(".close");
+//const modalClose = document.querySelector(".close-thank");
 const modalBody = document.getElementsByClassName('modal-body')[0];
-const modalBodyHTML = modalBody.innerHTML;
+//const modalBodyHTML = modalBody.innerHTML;
 const formR = document.getElementsByName('reserve');
 const registrClose = document.querySelector(".btn-close");
-
+const modalbgThank = document.querySelector(".bground-thank");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-modalClose.addEventListener("click",closeModal);
+modalClose.forEach((btn) => btn.addEventListener("click",closeModal));
 //registrClose.addEventListener("click",closeModal);
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  modalbgThank.style.display = "none"
 }
 
 function closeModal() {
   modalbg.style.display = "none";
+  modalbgThank.style.display = "none"
   document.getElementById("form").reset();
 }
-function closeModal() {
+/*function closeModal() {
   if(flag == 0){
   modalbg.style.display = "none";
   document.getElementById("form").reset();
@@ -41,7 +44,7 @@ function closeModal() {
     modalBody.innerHTML = modalBodyHTML;
     flag -=1;
   }
-}
+}*/
 
 /*let closeForm = document.querySelector(".btn-close");
 
@@ -229,13 +232,26 @@ function validateForm(){
   
   if(validateDate() & checkedRadio() & validateFirst(formFirst) & validateLast(formLast) & validateEmail(formEmail) & validateQuantity(formQuantity) & validateCheckBox1(formCheckBox1)){
     
-    flag += 1;
+    modalbg.style.display = "none";
+    modalbgThank.style.display = "block";
+    document.getElementById("form").reset();
+
+    /*flag += 1;
     let btnClose = "<input class='btn-submit btn-close' type='button' class='button' value='Fermer'/> ";
     let textRegistration = "<p class='textRegistr'> Merci pour votre inscription </p>";
     
-    modalBody.innerHTML = textRegistration + btnClose;
-
-  
+    modalBody.innerHTML = textRegistration + btnClose;  */
   };
 };
+
+let btnClose = document.getElementsByClassName("btn-close")[0];
+
+btnClose.addEventListener('click',function(){
+  closeThank(this);
+});
+
+function closeThank(){
+  console.log("j'ecoute fermer");
+  modalbgThank.style.display = "none";
+}
 
