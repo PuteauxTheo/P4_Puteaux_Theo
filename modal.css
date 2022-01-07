@@ -176,6 +176,7 @@ main {
 }
 
 .content {
+  min-height: 700px;
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
@@ -490,9 +491,9 @@ input[data-error]::after {
 /* modal text after submit */
 
 .textRegistr{
+  height: 575px;
   left: 585px;
   top: 448px;
-
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
@@ -508,6 +509,9 @@ footer {
   margin: 0 20px;
 }
 @media screen and (max-width: 800px) {
+  .bground{
+    background-color: rgba(0,0,0,0);
+  }
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -515,7 +519,7 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0;
     min-width: 0;
   }
   .hero-content::after {
@@ -526,17 +530,18 @@ footer {
   }
   .hero-headline {
     font-size: 2.5rem;
-    white-space: normal;
     width: unset;
+    white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     white-space: normal;
+    margin-top: 35px;
   }
   .hero-img img {
     border-radius: 10px;
-    margin-top: 40px;
+    margin-top: 25px;
   }
   .hero-section > .btn-signup {
     display: block;
@@ -546,6 +551,12 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+  .logo-gameon {
+    height: 25px;
+  }
+  .header-logo{
+    margin: 13px 0px;
   }
 }
 
