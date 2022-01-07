@@ -13,11 +13,15 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalClose = document.querySelector(".close");
 const modalBody = document.getElementsByClassName('modal-body')[0];
+const modalBodyHTML = modalBody.innerHTML;
 const formR = document.getElementsByName('reserve');
+const registrClose = document.querySelector(".btn-close");
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 modalClose.addEventListener("click",closeModal);
+//registrClose.addEventListener("click",closeModal);
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
@@ -25,8 +29,18 @@ function launchModal() {
 
 function closeModal() {
   modalbg.style.display = "none";
-  document.getElementById("form").reset(); 
-  //document.getElementById('modalBody').reset(); 
+  document.getElementById("form").reset();
+}
+function closeModal() {
+  if(flag == 0){
+  modalbg.style.display = "none";
+  document.getElementById("form").reset();
+  }else{
+    //flag == 1
+    modalbg.style.display = "none";
+    modalBody.innerHTML = modalBodyHTML;
+    flag -=1;
+  }
 }
 
 /*let closeForm = document.querySelector(".btn-close");
@@ -111,7 +125,7 @@ function validateEmail(inputEmail){
     return true;
   }
 }
-// verifie que la date est pas vide.
+// validateDate verifie que la date est pas vide.
 
 let formDate = document.getElementById('birthdate');
 
@@ -209,10 +223,13 @@ btnSubmit.addEventListener('click',function(){
 
 // validateForm verifie que chaque est correct pour envoyer le message de confirmation d'inscription
 
+let flag = 0;
+
 function validateForm(){
   
   if(validateDate() & checkedRadio() & validateFirst(formFirst) & validateLast(formLast) & validateEmail(formEmail) & validateQuantity(formQuantity) & validateCheckBox1(formCheckBox1)){
     
+    flag += 1;
     let btnClose = "<input class='btn-submit btn-close' type='button' class='button' value='Fermer'/> ";
     let textRegistration = "<p class='textRegistr'> Merci pour votre inscription </p>";
     
@@ -221,6 +238,4 @@ function validateForm(){
   
   };
 };
-
-
 
