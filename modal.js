@@ -8,22 +8,23 @@ function editNav() {
 }
 
 // DOM Elements
+
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalClose = document.querySelectorAll(".close");
-//const modalClose = document.querySelector(".close-thank");
 const modalBody = document.getElementsByClassName('modal-body')[0];
-//const modalBodyHTML = modalBody.innerHTML;
 const formR = document.getElementsByName('reserve');
 const registrClose = document.querySelector(".btn-close");
 const modalbgThank = document.querySelector(".bground-thank");
 
 // launch modal event
+
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 modalClose.forEach((btn) => btn.addEventListener("click",closeModal));
-//registrClose.addEventListener("click",closeModal);
+
 // launch modal form
+
 function launchModal() {
   modalbg.style.display = "block";
   modalbgThank.style.display = "none"
@@ -34,21 +35,6 @@ function closeModal() {
   modalbgThank.style.display = "none"
   document.getElementById("form").reset();
 }
-/*function closeModal() {
-  if(flag == 0){
-  modalbg.style.display = "none";
-  document.getElementById("form").reset();
-  }else{
-    //flag == 1
-    modalbg.style.display = "none";
-    modalBody.innerHTML = modalBodyHTML;
-    flag -=1;
-  }
-}*/
-
-/*let closeForm = document.querySelector(".btn-close");
-
-closeForm.addEventListener("click",closeModal);*/
 
 
 // validateFirst permet de verifier si le prenom correspond bien a plus de 2 caracteres.
@@ -63,10 +49,7 @@ function validateFirst(inputFirst){
   let firstRegex = new RegExp('^[a-zA-Z][^0-9]+$');
 
   let testFirst = firstRegex.test(inputFirst.value);
-  
-  //affiche dans la console si le test est reussi ou pas 
-  console.log("Le test du prenom est "+testFirst);
-  // indiquer error si formulaire vide 
+
   if(!testFirst || (inputFirst.value == "")){
     formFirst.parentElement.setAttribute("data-error-visible", "true");
     formFirst.parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
@@ -76,7 +59,7 @@ function validateFirst(inputFirst){
     formFirst.parentElement.setAttribute("data-error", "");
     return true;
   }
-};
+}
 
 // validateLast permet de verifier si le nom de famille correspond bien a plus de 2 caracteres.
 
@@ -133,15 +116,11 @@ function validateEmail(inputEmail){
 let formDate = document.getElementById('birthdate');
 
 function validateDate(){
-  console.log("je suis rentre dans validateDAte");
   if(formDate.value == null || formDate.value ==""){
-    console.log("je suis dans le si ");
-
     formDate.parentElement.setAttribute("data-error-visible", "true");
     formDate.parentElement.setAttribute("data-error", "Date de naissance non saisie.");
     return false;
   }else{
-    console.log("je suis dans le sinon ");
     formDate.parentElement.setAttribute("data-error-visible", "false");
     formDate.parentElement.setAttribute("data-error", "");
     return true;
@@ -206,17 +185,6 @@ function validateCheckBox1(){
   return true;
 }
 
-
-
-/*
-  (1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
-  (2) Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
-  (3) L'adresse électronique est valide.
-  (4) Pour le nombre de concours, une valeur numérique est saisie.
-  (5) Un bouton radio est sélectionné.
-  (6) La case des conditions générales est cochée, l'autre case est facultative / peut être laissée décochée.
-*/
-
 let btnSubmit = document.getElementsByClassName("btn-submit")[0];
 
 
@@ -226,7 +194,6 @@ btnSubmit.addEventListener('click',function(){
 
 // validateForm verifie que chaque est correct pour envoyer le message de confirmation d'inscription
 
-let flag = 0;
 
 function validateForm(){
   
@@ -235,12 +202,6 @@ function validateForm(){
     modalbg.style.display = "none";
     modalbgThank.style.display = "block";
     document.getElementById("form").reset();
-
-    /*flag += 1;
-    let btnClose = "<input class='btn-submit btn-close' type='button' class='button' value='Fermer'/> ";
-    let textRegistration = "<p class='textRegistr'> Merci pour votre inscription </p>";
-    
-    modalBody.innerHTML = textRegistration + btnClose;  */
   };
 };
 
