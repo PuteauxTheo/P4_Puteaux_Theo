@@ -77,7 +77,7 @@ img {
     display: block;
     color: red;
   }
-  .topnav a.icon:hover {
+  .topnav a.icon:focus {
     color: #fff;
   }
   
